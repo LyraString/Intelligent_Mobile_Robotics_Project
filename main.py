@@ -1,5 +1,6 @@
 from flight_environment import FlightEnvironment
 from path_planner import a_star_search
+import trajectory_generator
 
 env = FlightEnvironment(50)
 start = (1,2,0)
@@ -18,8 +19,11 @@ path = a_star_search(env)
 
 # --------------------------------------------------------------------------------------------------- #
 
+if path:
+    env.plot_cylinders(path)
 
-env.plot_cylinders(path)
+    traj = trajectory_generator.TrajectoryGenerator(path, average_speed=3.0)
+    traj.visualize()
 
 
 # --------------------------------------------------------------------------------------------------- #
