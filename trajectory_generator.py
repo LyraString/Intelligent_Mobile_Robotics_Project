@@ -29,7 +29,7 @@ class TrajectoryGenerator:
         """
         raw_path = np.array(path)
 
-        # --- [修复] 数据预处理：去除连续重复的点 ---
+        # --- [注！] 数据预处理：去除连续重复的点 ---
         if len(raw_path) > 0:
             # 计算相邻点之间的距离
             # np.diff 计算 path[i+1] - path[i]
