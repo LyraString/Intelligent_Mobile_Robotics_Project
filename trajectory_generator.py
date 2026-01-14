@@ -23,7 +23,7 @@ import matplotlib.pyplot as plt
 class TrajectoryGenerator:
     def __init__(self, path, average_speed=2.0):
         """
-        初始化轨迹生成器
+        初始化轨迹生成器，使用三次样条插值
         :param path: A*生成的路径点列表
         :param average_speed: 假设的平均飞行速度 (m/s)
         """
@@ -97,30 +97,29 @@ class TrajectoryGenerator:
 
         t_smooth, x_smooth, y_smooth, z_smooth = self.solve(dt)
 
-        fig, axs = plt.subplots(3, 1, figsize=(10, 12), sharex=True)
-        fig.suptitle('Generated Trajectory (Cubic Spline)', fontsize=16)
+        fig, axs = plt.subplots(3, 1, figsize=(10, 7), sharex=True)
+        fig.suptitle('Generated Trajectory', fontsize=16)
 
         # Plot X
         axs[0].plot(t_smooth, x_smooth, 'r-', label='Trajectory X(t)')
         axs[0].scatter(self.time_knots, self.path[:, 0], color='black', marker='o', label='Path Points')
-        axs[0].set_ylabel('X Position (m)')
+        axs[0].set_ylabel('X (m)')
         axs[0].legend()
         axs[0].grid(True)
 
         # Plot Y
         axs[1].plot(t_smooth, y_smooth, 'g-', label='Trajectory Y(t)')
         axs[1].scatter(self.time_knots, self.path[:, 1], color='black', marker='o', label='Path Points')
-        axs[1].set_ylabel('Y Position (m)')
+        axs[1].set_ylabel('Y (m)')
         axs[1].legend()
         axs[1].grid(True)
 
         # Plot Z
         axs[2].plot(t_smooth, z_smooth, 'b-', label='Trajectory Z(t)')
         axs[2].scatter(self.time_knots, self.path[:, 2], color='black', marker='o', label='Path Points')
-        axs[2].set_ylabel('Z Position (m)')
+        axs[2].set_ylabel('Z (m)')
         axs[2].set_xlabel('Time (s)')
         axs[2].legend()
         axs[2].grid(True)
 
         plt.tight_layout()
-        plt.show()

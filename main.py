@@ -1,21 +1,22 @@
 from flight_environment import FlightEnvironment
 from path_planner import a_star_search
 import trajectory_generator
+import matplotlib.pyplot as plt
 
 env = FlightEnvironment(50)
 start = (1,2,0)
 goal = (18,18,3)
 
 # --------------------------------------------------------------------------------------------------- #
-# Call your path planning algorithm here. 
-# The planner should return a collision-free path and store it in the variable `path`. 
+# Call your path planning algorithm here.
+# The planner should return a collision-free path and store it in the variable `path`.
 # `path` must be an N×3 numpy array, where:
 #   - column 1 contains the x-coordinates of all path points
 #   - column 2 contains the y-coordinates of all path points
 #   - column 3 contains the z-coordinates of all path points
 # This `path` array will be provided to the `env` object for visualization.
 
-path = a_star_search(env)
+path = a_star_search(env, start_pos=start, goal_pos=goal)
 
 # --------------------------------------------------------------------------------------------------- #
 
@@ -25,6 +26,9 @@ if path:
     traj = trajectory_generator.TrajectoryGenerator(path, average_speed=3.0)
     traj.visualize()
 
+    plt.show()
+else:
+    print("Path not found!")
 
 # --------------------------------------------------------------------------------------------------- #
 #   Call your trajectory planning algorithm here. The algorithm should
@@ -46,11 +50,11 @@ if path:
 
 
 
-# You must manage this entire project using Git. 
-# When submitting your assignment, upload the project to a code-hosting platform 
-# such as GitHub or GitLab. The repository must be accessible and directly cloneable. 
+# You must manage this entire project using Git.
+# When submitting your assignment, upload the project to a code-hosting platform
+# such as GitHub or GitLab. The repository must be accessible and directly cloneable.
 #
-# After cloning, running `python3 main.py` in the project root directory 
+# After cloning, running `python3 main.py` in the project root directory
 # should successfully execute your program and display:
 #   1) the 3D path visualization, and
 #   2) the trajectory plot.

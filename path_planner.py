@@ -60,7 +60,7 @@ def a_star_search(env, start_pos=(1, 2, 0), goal_pos=(18, 18, 3), step_size=0.5)
     open_list = []  # 优先队列
     heapq.heappush(open_list, start_node)
 
-    # 使用字典记录已访问节点，key为坐标字符串或元组（为了处理浮点数精度，建议取整或保留几位小数）
+    # 使用字典记录已访问节点，key为坐标字符串或元组
     # 这里为了简单，我们用某种方式量化坐标作为key
     closed_set = set()
 
@@ -113,9 +113,6 @@ def a_star_search(env, start_pos=(1, 2, 0), goal_pos=(18, 18, 3), step_size=0.5)
 
             new_node = Node(new_x, new_y, new_z, g=g_cost, h=h_cost, parent=current_node)
 
-            # 注意：标准A*这里应该检查新节点是否更优，
-            # 但在简单网格搜索中，直接加入队列通常也能工作（虽然会增加计算量）
-            # 为了保持“不用特别复杂”，这里直接push，依赖closed_set过滤
             heapq.heappush(open_list, new_node)
 
     print("未找到路径！")

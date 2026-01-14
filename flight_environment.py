@@ -150,7 +150,6 @@ class FlightEnvironment:
             ax.scatter(xs[0], ys[0], zs[0], s=40) 
             ax.scatter(xs[-1], ys[-1], zs[-1], s=40) 
         self.set_axes_equal(ax)
-        plt.show()
 
 
     def set_axes_equal(self,ax):
